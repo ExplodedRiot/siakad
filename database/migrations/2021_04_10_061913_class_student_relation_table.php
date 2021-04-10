@@ -13,7 +13,11 @@ class ClassStudentRelationTable extends Migration
      */
     public function up()
     {
-        //
+        Schema::table('student', function (Blueprint $table) {
+            $table->dropColumn('class');//delete class column
+            $table->unsignedBigInteger('class_id')->nullable();//add class_id column
+            $table->foreign('class_id')->references('id')->on('class');//add foreign key in class_id column
+        });
     }
 
     /**
@@ -23,6 +27,9 @@ class ClassStudentRelationTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('student', function (Blueprint $table) {
+            $table->string('class');
+            $table->dropForeign(['class_id']);
+        });
     }
 }
