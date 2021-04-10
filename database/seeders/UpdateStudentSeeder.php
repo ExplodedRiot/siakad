@@ -13,6 +13,7 @@ class UpdateStudentSeeder extends Seeder
      */
     public function run()
     {
-        //
+        //for example we want to update the student data to TI 2H Class
+        DB::table('student')->update(['class_id' => 8]);
     }
 }
