@@ -24,17 +24,28 @@ class StudentController extends Controller
  }
  public function store(Request $request)
  {
+
  //melakukan validasi data
  $request->validate([
  'Nim' => 'required',
  'Name' => 'required',
  'Class' => 'required',
  'Major' => 'required', 
- ]); // eloquent function to add data
- Student::create($request->all());
- // if the data is added successfully, will return to the main page
- return redirect()->route('student.index')
- ->with('success', 'Student Successfully Added');
+ ]); 
+ $student = new Mahasiswa;
+ $student->nim = $request->get('Nim');
+ $student->name = $request->get('Name');
+ $student->major = $request->get('Major');
+ $student->save();
+
+ $class = new ClassModel;
+ $class->id = $request->get('Class');
+ // eloquent function to add data
+$student->class()->associate($class);
+$student->save();
+
+return redirect()->route('student.index')
+    ->with('success', 'Stdent successfully added');
  }
  public function show($Nim)
  {
