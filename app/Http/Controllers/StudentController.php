@@ -19,7 +19,8 @@ class StudentController extends Controller
  }
  public function create()
  {
- return view('student.create');
+     $class = ClassModel::all(); //get data from all class table
+     return view('student.create',['class' => $class])
  }
  public function store(Request $request)
  {
