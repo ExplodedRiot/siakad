@@ -31,8 +31,12 @@
  </div>
  <div class="form-group">
  <label for="Class">Class</label> 
- <input type="Class" name="Class" class="form-control" id="Class" ariadescribedby="Class" > 
- </div>
+ <select name="Class" class="form-control">
+    @foreach($class as $kls)
+    <option value="{{$kls->id}}">{{$kls->class_name}}</option>
+    @endforeach
+    </select>
+</div>
  <div class="form-group">
  <label for="Major">Major</label> 
  <input type="Major" name="Major" class="form-control" id="Major" ariadescribedby="Major" > 
