@@ -50,15 +50,15 @@ return redirect()->route('student.index')
  public function show($Nim)
  {
  // displays detailed data by finding / by Student Nim
- $Student = Student::with('class')->where('nim',$Nim)->first();
+ $student = Student::with('class')->where('nim',$Nim)->first();
 
  return view('student.detail', ['Student' => $student]);
  }
  public function edit($Nim)
  {
 // displays detail data by finding based on Student Nim for editing
- $Student = Student::with('Class')->where('Nim', $Nim)->first();
- $Class = Class::all(); //mendapatkan data dari tabel kelas
+ $student = Student::with('Class')->where('Nim', $Nim)->first();
+ $class = Class::all(); //mendapatkan data dari tabel kelas
  return view('student.edit', compact('Student'));
  }
  public function update(Request $request, $Nim)
@@ -70,8 +70,20 @@ return redirect()->route('student.index')
  'Class' => 'required',
  'Major' => 'required', 
  ]);
+
+ $student = Student::with('Class')->where('Nim', $Nim)->first();
+ $student->Nim = $request->get('Nim');
+ $student->Name = $request->get('Name');
+ $student->Major = $request->get('Major');
+ $student->save();
+
+ $class = new class;
+ $class->id = $request->get('Class');
+
 //Eloquent function to update the data
- Student::find($Nim)->update($request->all());
+$student->class()->associate($class);
+$student->save();
+
 //if the data successfully updated, will return to main page
  return redirect()->route('student.index')
  ->with('success', 'Student Successfully Updated');
