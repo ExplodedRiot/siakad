@@ -22,7 +22,7 @@ class ClassSeeder extends Seeder
             ['class_name' => 'TI 2F',],
             ['class_name' => 'TI 2G',],
             ['class_name' => 'TI 2H',],
-            ['class_name' => 'TI 2I',]
+            ['class_name' => 'TI 2I',],
         ];
 
         DB::table('class')->insert($class);
