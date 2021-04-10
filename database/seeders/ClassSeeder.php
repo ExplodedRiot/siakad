@@ -25,6 +25,5 @@ class ClassSeeder extends Seeder
             ['class_name' => 'TI 2I',],
         ];
 
-        DB::table('class')->insert($class);
     }
 }
