@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Facades\DB;
 
 class UpdateStudentSeeder extends Seeder
 {
