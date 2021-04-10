@@ -51,13 +51,14 @@ return redirect()->route('student.index')
  {
  // displays detailed data by finding / by Student Nim
  $Student = Student::with('class')->where('nim',$Nim)->first();
- 
+
  return view('student.detail', ['Student' => $student]);
  }
  public function edit($Nim)
  {
 // displays detail data by finding based on Student Nim for editing
- $Student = DB::table('student')->where('nim', $Nim)->first();;
+ $Student = Student::with('Class')->where('Nim', $Nim)->first();
+ $Class = Class::all(); //mendapatkan data dari tabel kelas
  return view('student.edit', compact('Student'));
  }
  public function update(Request $request, $Nim)
