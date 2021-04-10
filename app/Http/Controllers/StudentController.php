@@ -50,8 +50,9 @@ return redirect()->route('student.index')
  public function show($Nim)
  {
  // displays detailed data by finding / by Student Nim
- $Student = Student::find($Nim);
- return view('student.detail', compact('Student'));
+ $Student = Student::with('class')->where('nim',$Nim)->first();
+ 
+ return view('student.detail', ['Student' => $student]);
  }
  public function edit($Nim)
  {
