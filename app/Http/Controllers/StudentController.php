@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 use App\Models\Student;
 use Illuminate\Http\Request;
+use App\Models\Class\ClassModel;
 use DB;
 class StudentController extends Controller
 {
@@ -12,11 +13,9 @@ class StudentController extends Controller
  */
  public function index()
  {
- // the eloquent function to displays data
- $student = $student = DB::table('student')->get(); // Mengambil semua isi tabel
- //$posts = Student::orderBy('Nim', 'desc')->paginate(6);
- return view('student.index', compact('student'));
- //with('i', (request()->input('page', 1) - 1) * 5);
+    $student = Student::with('class')->get();
+    $paginate = Student::orderBy('id_student', 'asc')->paginate(3);
+    return view('student.index', ['student' => $student,'paginate'=>$paginate]);
  }
  public function create()
  {
