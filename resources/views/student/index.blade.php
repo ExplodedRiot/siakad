@@ -29,7 +29,7 @@
  
  <td>{{ $mhs ->nim }}</td>
  <td>{{ $mhs ->name }}</td>
- <td>{{ $mhs ->class }}</td>
+ <td>{{ $mhs ->class ->class_name }}</td>
  <td>{{ $mhs ->major }}</td>
  <td>
  <form action="{{ route('student.destroy',['student'=>$mhs->nim]) }}" method="POST">
