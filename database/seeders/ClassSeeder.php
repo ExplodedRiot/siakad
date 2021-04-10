@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class ClassSeeder extends Seeder
 {
@@ -24,6 +25,6 @@ class ClassSeeder extends Seeder
             ['class_name' => 'TI 2H',],
             ['class_name' => 'TI 2I',],
         ];
-
+        DB::table('class')->insert($class);
     }
 }
