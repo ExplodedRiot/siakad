@@ -5,6 +5,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\Mahasiswa as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model; //Model Eloquent
+use App\Models\ClassModel;
+
 class Student extends Model // Model definition
 {
  protected $table='student'; // Eloquent will create a student model to store records in the student table
@@ -20,4 +22,9 @@ class Student extends Model // Model definition
  'Class',
  'Major',
  ];
+
+ public function class()
+ {
+     return $this->belongsTo(ClassModel::class);
+ }
 };
