@@ -102,4 +102,13 @@ $student->save();
         ->where('name','like',"%".$search."%");
         return view ('student.index', compact('student'));
     }
+    public function print_pdf($nim)
+    {
+        $id = Mahasiswa::where('nim', $nim)->value('id_student');
+        $student = student::with('class', 'course')
+        ->where('nim', $nim)
+        ->first();
+        $pdf = PDF::loadview('student.course', ['Student'=> $student]);
+        return $pdf->stream();
+    }
 };
