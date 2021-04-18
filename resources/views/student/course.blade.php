@@ -45,7 +45,7 @@
 
 
             </table>
-            <a class="btn btn-success mt-3" href="{{ route('mahasiswa.index') }}">Back</a>
+            <a class="btn btn-success mt-3" href="{{ route('student.index') }}">Back</a>
         </div>
     </div>
 </div>
