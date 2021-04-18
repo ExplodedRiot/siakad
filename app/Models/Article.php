@@ -11,8 +11,6 @@ class Article extends Model
 {
     use HasFactory;
 
-    @var array
-
     protected $fillable = [
         'title',
         'content',
