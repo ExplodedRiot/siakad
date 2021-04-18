@@ -80,7 +80,20 @@ class ArticleController extends Controller
      */
     public function update(Request $request, Article $article)
     {
-        //
+        $article = Article::find($id);
+
+        $article->title = $request->title;
+        $article->content = $request->content;
+
+        if ($article->featured_image && file_exists(storage_path('app/public/' . $article->featured_image))) {
+            Storage::delete('public/' . $article->featured_image);
+        }
+        $image_name = $request->file('image')->store('images', 'public');
+        $article->featured_image = $image_name;
+
+        $article->save();
+        return redirect()->route('articles.index')
+        ->with('success', 'Article Succesfully Updated');
     }
 
     /**
