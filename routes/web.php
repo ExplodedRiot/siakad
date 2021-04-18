@@ -17,5 +17,6 @@ use Illuminate\Http\Request;
 
 Route::get('/', function () {
 Route::resource('student', StudentController::class);
+Route::get('/article/print_pdf', [ArticleController::class, 'print_pdf'])->name('print_pdf');
     return view('welcome');
 });
