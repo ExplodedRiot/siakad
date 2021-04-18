@@ -108,4 +108,10 @@ class ArticleController extends Controller
     {
         //
     }
+
+    public function print_pdf(){
+        $articles = Article::all();
+        $pdf = PDF::loadview('articles.articles_pdf',['articles'=>$articles]);
+        return $pdf->stream();
+    }
 }
