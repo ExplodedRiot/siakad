@@ -9,6 +9,9 @@
 auto;"> 
  <tr> 
  <th>Title</th> 
+ <td><a href="{{route('articles.edit, ['article=>$article->id]) }}">{{article->title}}</a></td>
+ <td>{{ $article->content }}</td>
+ <td><img width="150px" src="{{asset('storage/'. $article->featured_image)}}"></td>
  <th>Content</th> 
  <th>Image</th> 
  </tr> 
