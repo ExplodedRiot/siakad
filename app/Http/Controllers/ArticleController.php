@@ -45,7 +45,7 @@ class ArticleController extends Controller
             'content' => $request->content,
             'featured_image' => $image_name
         ]);
-        return red redirect()->route('articles.index')
+        return redirect()->route('articles.index')
         ->with('success', 'Articles Succesfully Added');
     }
 
