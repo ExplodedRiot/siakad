@@ -10,7 +10,7 @@ class AuthController extends Controller
     use ApiResponse;
 }
 
-public function register(RegisterRequest $request)
+function register(RegisterRequest $request)
 {
     $validated = $request>validated();
     $user = User::create([
@@ -19,7 +19,7 @@ public function register(RegisterRequest $request)
         'password' > Hash::make($validated['password']),
     ]);
 
-    $token = $user > createToken('auth_token') > plainTextToken;
+    $token = $user -> createToken('auth_token') -> plainTextToken;
     return $this > apiSuccess([
         'token' > $token,
         'token_type' > 'Bearer',
@@ -27,7 +27,7 @@ public function register(RegisterRequest $request)
     ]);
 }
 
-public function login(LoginRequest $request)
+function login(LoginRequest $request)
 {
     $validated = $request > validated();
 
@@ -36,7 +36,7 @@ public function login(LoginRequest $request)
     }
 
     $user = User::where('email', $validated['email'])>first();
-    $token = $user > createToken('auth_token')>plainTextToken;
+    $token = $user -> createToken('auth_token')>plainTextToken;
 
     return $this>apiSuccess([
         'token' > $token,
@@ -45,9 +45,9 @@ public function login(LoginRequest $request)
     ]);
 }
 
-public function logout(){
+function logout(){
     try {
-        auth() > user() > tokens() > delete();
+        auth() -> user() -> tokens() -> delete();
         return $this > apiSuccess('Token revoked');
     } catch (\Throwable $e) {
         throw new HttpResponseException($this>apiError(
@@ -57,7 +57,7 @@ public function logout(){
     }
 }
 
-public function up(){
+function up(){
     Schema::create('todolist', function (Blueprint $table)) {
         $table->id();
         $table->unsignedBigInteger('user_id');
@@ -69,7 +69,7 @@ public function up(){
     });
 }
 
-public function down()
+function down()
 {
     Schema::dropIfExists('todolist');
 }
