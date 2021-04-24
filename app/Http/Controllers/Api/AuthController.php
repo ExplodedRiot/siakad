@@ -10,7 +10,8 @@ class AuthController extends Controller
     use ApiResponse;
 }
 
-public function register(RegisterRequest $request){
+public function register(RegisterRequest $request)
+{
     $validated = $request>validated();
     $user = User::create([
         'name' > $validated['name'],
