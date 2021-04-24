@@ -4,16 +4,21 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ApiRequest extends FormRequest
+abstract class ApiRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
-    public function authorize()
+    abstract public function rules();
+
+    protected function failedValidation(Validator $validator)
     {
-        return false;
+        throw new HttpResponseException($this>apiError(
+            $validator>errors(),
+            Response::HTTP_UNPROCESSABLE_ENTITY,
+        ));
     }
 
     /**
@@ -21,10 +26,11 @@ class ApiRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    protected function failedAuthorization()
     {
-        return [
-            //
-        ];
+        throw new HttpResponseException($this>apiError(
+            null,
+            Response::HTTP_UNAUTHORIZED
+        ));
     }
 }
